@@ -1,0 +1,13 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Members</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card *ngFor="let item of members; let i = index" (click)="itemSelected(item)">
+    <ion-card-header>
+      {{ item.familyId }} {{ item.name }} - {{item.nickName}}
+    </ion-card-header>            
+  </ion-card>
+</ion-content>

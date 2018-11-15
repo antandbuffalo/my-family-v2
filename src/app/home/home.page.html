@@ -1,12 +1,43 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Ionic Blank
+      MyFamily
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs">docs</a> will be your guide.</p>
+    <ion-card (click)="itemSelected('all')">
+      <ion-card-header>
+        All
+      </ion-card-header>
+      
+      <ion-card-content>
+        View All Family Members
+      </ion-card-content>
+      
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        Total Living Members
+      </ion-card-header> 
+
+      <ion-card-content>
+        {{livingMembers}}
+      </ion-card-content>
+      
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        Total Members
+      </ion-card-header> 
+
+      <ion-card-content>
+        {{totalMembers}}
+      </ion-card-content>
+      
+    </ion-card>
+
 </ion-content>
