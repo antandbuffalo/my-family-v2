@@ -31,6 +31,7 @@ export class MemberDetailsPage implements OnInit {
   save() {
     console.log(this.member);
     this.storage.updateMember(this.member);
+    this.location.back();
   }
 
   cancel() {
