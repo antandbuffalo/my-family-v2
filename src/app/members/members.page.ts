@@ -3,6 +3,7 @@ import { Member } from '../models/member';
 import { RestService } from '../services/rest-service/rest.service';
 import { MemberService } from '../services/member-service/member.service';
 import { Router } from '@angular/router';
+import { FirebaseService } from '../services/firebase-service/firebase.service';
 
 @Component({
   selector: 'app-members',
@@ -15,10 +16,13 @@ export class MembersPage implements OnInit {
   
   constructor(private restService: RestService, 
     private memberService: MemberService,
-    private router: Router) {
+    private router: Router,
+    private storage: FirebaseService) {
+      
   }
   ngOnInit() {
-    this.getMembers();
+    //this.getMembers();
+    this.members = this.storage.members;
   }
 
   getMembers() {

@@ -3,6 +3,7 @@ import { Location } from '@angular/common';
 import { MemberService } from '../services/member-service/member.service';
 import { UtilityService } from '../services/utility-service/utility.service';
 import { Router } from '@angular/router';
+import { FirebaseService } from '../services/firebase-service/firebase.service';
 
 @Component({
   selector: 'app-member-details',
@@ -16,7 +17,8 @@ export class MemberDetailsPage implements OnInit {
   constructor(private memberService: MemberService, 
     private location: Location,
     private utility: UtilityService,
-    private router: Router) {
+    private router: Router,
+    private storage: FirebaseService) {
   }
 
   ngOnInit() {
@@ -28,6 +30,7 @@ export class MemberDetailsPage implements OnInit {
 
   save() {
     console.log(this.member);
+    this.storage.updateMember(this.member);
   }
 
   cancel() {

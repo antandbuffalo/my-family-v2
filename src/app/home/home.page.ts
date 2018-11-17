@@ -1,9 +1,14 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+
+import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 
 import { Member } from './../models/member';
 import { RestService } from './../services/rest-service/rest.service';
+import { FirebaseService } from '../services/firebase-service/firebase.service';
 
 @Component({
   selector: 'app-home',
@@ -15,13 +20,27 @@ export class HomePage {
   errorMessage: String;
   livingMembers = 0;
   totalMembers = 0;
+  membersCloud: Observable<Member[]>;
 
-  constructor(private restService: RestService, private router: Router) {
+  constructor(private restService: RestService, 
+    private router: Router,
+    private storage: FirebaseService) {
+      this.fetchData();
+  }
 
+  fetchData() {
+    this.membersCloud = this.storage.getMembers();    
+    this.membersCloud.subscribe(res => {
+      console.log("after adding id");
+      console.log(res);
+      this.members = res;
+      this.storage.members = this.members;
+      this.getTotalLivingMembers();
+    });
   }
 
   ngOnInit() {
-    this.getMembers();
+    //this.getMembers();
   }
 
   getMembers() {
